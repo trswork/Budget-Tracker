@@ -1,4 +1,3 @@
-// create variable to hold db connection
 let db;
 // establish a connection to IndexedDB database 
 const request = indexedDB.open('budget_tracker', 1);
@@ -39,48 +38,48 @@ function saveRecord(record) {
     transactionObjectStore.add(record);
   }
 
-  function uploadTransaction() {
-    // open a transaction on your db
-    const transaction = db.transaction(['new_transaction'], 'readwrite');
+//   function uploadTransaction() {
+//     // open a transaction on your db
+//     const transaction = db.transaction(['new_transaction'], 'readwrite');
   
-    // access your object store
-    const transactionObjectStore = transaction.objectStore('new_transaction');
+//     // access your object store
+//     const transactionObjectStore = transaction.objectStore('new_transaction');
   
-    // get all records from store and set to a variable
-    const getAll = transactionObjectStore.getAll();
+//     // get all records from store and set to a variable
+//     const getAll = transactionObjectStore.getAll();
 
-    // upon a successful .getAll() execution, run this function
-getAll.onsuccess = function() {
-    // if there was data in indexedDb's store, let's send it to the api server
-    if (getAll.result.length > 0) {
-      fetch('/api', {
-        method: 'POST',
-        body: JSON.stringify(getAll.result),
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => response.json())
-        .then(serverResponse => {
-          if (serverResponse.message) {
-            throw new Error(serverResponse);
-          }
-          // open one more transaction
-          const transaction = db.transaction(['new_transaction'], 'readwrite');
-          // access the new_transaction object store
-          const transactionObjectStore = transaction.objectStore('new_transaction');
-          // clear all items in your store
-          transactionObjectStore.clear();
+//     // upon a successful .getAll() execution, run this function
+// getAll.onsuccess = function() {
+//     // if there was data in indexedDb's store, let's send it to the api server
+//     if (getAll.result.length > 0) {
+//       fetch('/api', {
+//         method: 'POST',
+//         body: JSON.stringify(getAll.result),
+//         headers: {
+//           Accept: 'application/json, text/plain, */*',
+//           'Content-Type': 'application/json'
+//         }
+//       })
+//         .then(response => response.json())
+//         .then(serverResponse => {
+//           if (serverResponse.message) {
+//             throw new Error(serverResponse);
+//           }
+//           // open one more transaction
+//           const transaction = db.transaction(['new_transaction'], 'readwrite');
+//           // access the new_transaction object store
+//           const transactionObjectStore = transaction.objectStore('new_transaction');
+//           // clear all items in your store
+//           transactionObjectStore.clear();
 
-          alert('All saved transactions has been submitted!');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  };
-  }
+//           alert('All saved transactions has been submitted!');
+//         })
+//         .catch(err => {
+//           console.log(err);
+//         });
+//     }
+//   };
+//   }
 
-  // listen for app coming back online
-window.addEventListener('online', uploadTransaction);
+//   // listen for app coming back online
+// window.addEventListener('online', uploadTransaction);
