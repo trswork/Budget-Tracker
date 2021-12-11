@@ -20,9 +20,12 @@ THEN the deposits or expenses added while they were offline are added to their t
 - Run npm start to run server.
 
 ## Questions
+<<<<<<< HEAD
 - Github page: https://trswork.github.io/Budget-Tracker/
 <<<<<<< HEAD
 - Heroku: 
 =======
 - Heroku: https://budget-tracker-8.herokuapp.com/
 >>>>>>> b744908859f29afb66a5df81d9a5d981b58c8128
+=======
+>>>>>>> 22a405fe991f67fc103cbf71e8322c89aaccf6b4
